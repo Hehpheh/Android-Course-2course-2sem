@@ -1,61 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="183dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="96dp"
-        android:onClick="startNewActivity"
-        android:text="Перейти к регистрация"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/phone_number_field"
-        android:layout_width="0dp"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:hint="Номер телефона"
-        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:maxLength="18"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@id/register_button" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/password_field"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:maxLength="18"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_field" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вход" />
 
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="0dp"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Регистрация" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:onClick="sendData"
-        android:text="Отправить"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_field" />
+        app:layout_constraintTop_toBottomOf="@id/tablayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
