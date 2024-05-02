@@ -31,7 +31,7 @@ public class VPAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment, String title){
         fragmentArrayList.add(fragment);
         fragmentTitle.add(title);
-
+        
     }
 
     @Nullable
