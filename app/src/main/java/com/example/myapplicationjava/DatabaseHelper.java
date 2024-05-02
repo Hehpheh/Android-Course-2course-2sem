@@ -34,7 +34,6 @@ public class DatabaseHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_LOGIN + " = ?", new String[]{login});
         return cursor.moveToFirst();
     }
-
     public boolean checkUserPassword(String login, String password) {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_LOGIN + " = ? AND " + COLUMN_PASSWORD + " = ?", new String[]{login, password});
         return cursor.moveToFirst();

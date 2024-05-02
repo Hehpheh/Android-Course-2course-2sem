@@ -17,7 +17,6 @@ public class Fragment1 extends Fragment {
     private EditText loginEditText;
     private EditText passwordEditText;
     private Button loginButton;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_1, container, false);

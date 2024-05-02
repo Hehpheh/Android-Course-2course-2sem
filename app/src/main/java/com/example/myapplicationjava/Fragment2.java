@@ -20,7 +20,6 @@ public class Fragment2 extends Fragment {
     private EditText passwordEditText;
     private EditText repeatPasswordEditText;
     private Button registerButton;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_2, container, false);
