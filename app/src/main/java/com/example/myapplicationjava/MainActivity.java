@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+
+public class
+MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private DatabaseHelper db;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean loginUser(String login, String password) {
         if (db.checkUserExists(login)) {
             if (db.checkUserPassword(login, password)) {
-                Intent intent = new Intent(this, WelcomeActivity.class);
+                //тут  успешная авторизация
+                Intent intent = new Intent(this, WeatherActivity.class);
                 intent.putExtra("login", login);
                 startActivity(intent);
                 return true;
