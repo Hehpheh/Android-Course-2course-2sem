@@ -8,11 +8,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import org.json.JSONArray;
@@ -42,12 +45,12 @@ public class WeatherActivity extends Activity {
         weatherIconImageView = findViewById(R.id.image_view_weather_icon);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        // Проверка разрешений
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
-        // Определение locationListener
+
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -58,20 +61,13 @@ public class WeatherActivity extends Activity {
                 new GetURLData().execute(url);
             }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
 
-            @Override
-            public void onProviderEnabled(String provider) {}
-
-            @Override
-            public void onProviderDisabled(String provider) {}
         };
 
-        // Запрос обновления местоположения
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
-        // Обработчик нажатия кнопки
+
         main_btn.setOnClickListener(view -> {
             String city = user_field.getText().toString().trim();
             if (city.equals("")) {
@@ -84,7 +80,22 @@ public class WeatherActivity extends Activity {
         });
     }
 
-    // AsyncTask для получения данных о погоде
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+                }
+            } else {
+                Toast.makeText(this, "Разрешение на использование геолокации не предоставлено", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
     @SuppressLint("StaticFieldLeak")
     private class GetURLData extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
@@ -100,6 +111,12 @@ public class WeatherActivity extends Activity {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
 
+                int responseCode = connection.getResponseCode();
+                if (responseCode != HttpURLConnection.HTTP_OK) {
+                    Log.e("WeatherApp", "Код ошибки HTTP: " + responseCode);
+                    return null;
+                }
+
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder buffer = new StringBuilder();
                 String line;
@@ -108,6 +125,7 @@ public class WeatherActivity extends Activity {
                 }
                 return buffer.toString();
             } catch (Exception e) {
+                Log.e("WeatherApp", "Ошибка в doInBackground: " + e.getMessage());
                 e.printStackTrace();
                 return null;
             } finally {
@@ -119,6 +137,7 @@ public class WeatherActivity extends Activity {
                         reader.close();
                     }
                 } catch (Exception e) {
+                    Log.e("WeatherApp", "Ошибка при закрытии потока: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
@@ -127,6 +146,10 @@ public class WeatherActivity extends Activity {
         @SuppressLint("SetTextI18n")
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            if (result == null) {
+                result_info.setText("Ошибка получения данных о погоде");
+                return;
+            }
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray weatherArray = jsonObject.getJSONArray("weather");
@@ -143,7 +166,9 @@ public class WeatherActivity extends Activity {
                 String imageUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
                 Glide.with(WeatherActivity.this).load(imageUrl).into(weatherIconImageView);
             } catch (Exception e) {
+                Log.e("WeatherApp", "Ошибка в onPostExecute: " + e.getMessage());
                 e.printStackTrace();
+                result_info.setText("Ошибка обработки данных о погоде");
             }
         }
     }
