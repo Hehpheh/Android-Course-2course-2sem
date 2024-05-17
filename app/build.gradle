@@ -26,6 +26,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace 'com.example.myapplicationjava'
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
