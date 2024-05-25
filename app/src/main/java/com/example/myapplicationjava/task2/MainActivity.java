@@ -1,9 +1,12 @@
-package com.example.myapplicationjava;
+package com.example.myapplicationjava.task2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.myapplicationjava.task3.DatabaseHelper;
+import com.example.myapplicationjava.R;
+import com.example.myapplicationjava.task4.WeatherActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import android.content.Intent;

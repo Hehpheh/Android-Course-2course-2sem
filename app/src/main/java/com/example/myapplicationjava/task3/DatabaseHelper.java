@@ -1,4 +1,4 @@
-package com.example.myapplicationjava;
+package com.example.myapplicationjava.task3;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -6,7 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
 
 public class DatabaseHelper {
     private static final String DATABASE_NAME = "users.db";

@@ -1,35 +1,36 @@
-package com.example.myapplicationjava;
+package com.example.myapplicationjava.task2;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-public class Fragment1 extends Fragment {
+import com.example.myapplicationjava.R;
+import com.example.myapplicationjava.task2.MainActivity;
+
+public class Fragment2 extends Fragment {
     private EditText loginEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private EditText repeatPasswordEditText;
+    private Button registerButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_1, container, false);
+        View view = inflater.inflate(R.layout.fragment_2, container, false);
         loginEditText = view.findViewById(R.id.email_field);
         passwordEditText = view.findViewById(R.id.password_field);
-        loginButton = view.findViewById(R.id.send_button);
+        repeatPasswordEditText=view.findViewById(R.id.password_field2);
+        registerButton = view.findViewById(R.id.send_button);
 
-        loginButton.setOnClickListener(v -> {
+        registerButton.setOnClickListener(v -> {
             String login = loginEditText.getText().toString();
             String password = passwordEditText.getText().toString();
-
-            ((MainActivity) getActivity()).loginUser(login, password);
+            String repeatPassword = repeatPasswordEditText.getText().toString();
+            ((MainActivity) getActivity()).registerUser(login, password,repeatPassword);
         });
         return view;
     }

@@ -1,4 +1,4 @@
-package com.example.myapplicationjava;
+package com.example.myapplicationjava.task5;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.widget.RemoteViews;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.AppWidgetTarget;
+import com.example.myapplicationjava.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

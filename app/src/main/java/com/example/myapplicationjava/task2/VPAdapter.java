@@ -1,4 +1,4 @@
-package com.example.myapplicationjava;
+package com.example.myapplicationjava.task2;
 
 
 
