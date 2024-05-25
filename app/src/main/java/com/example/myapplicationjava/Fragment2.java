@@ -1,4 +1,4 @@
-package com.example.myapplicationjava.task2;
+package com.example.myapplicationjava;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
-
-import com.example.myapplicationjava.R;
-import com.example.myapplicationjava.task2.MainActivity;
 
 public class Fragment2 extends Fragment {
     private EditText loginEditText;

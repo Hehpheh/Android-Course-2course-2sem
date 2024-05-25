@@ -1,4 +1,4 @@
-package com.example.myapplicationjava.task3;
+package com.example.myapplicationjava;
 
 import static android.content.Context.MODE_PRIVATE;
 

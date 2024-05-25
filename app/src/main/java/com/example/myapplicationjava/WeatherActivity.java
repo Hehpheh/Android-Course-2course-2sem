@@ -1,4 +1,4 @@
-package com.example.myapplicationjava.task4;
+package com.example.myapplicationjava;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
-import com.example.myapplicationjava.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
